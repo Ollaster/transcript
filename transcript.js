@@ -42,7 +42,7 @@ module.exports = function (client, cmd, msglimit) {
       console.log(err);
       return;
     })
-    await message.react("📑"); //react to the message as a prove that everything above worked!
+    await message.react("✅"); //react to the message as a prove that everything above worked!
     //The "TITLE" 
     pObj = docx.createP() //Make a new paragraph
     pObj.options.align = 'left';  //align it to the left page
@@ -116,7 +116,7 @@ module.exports = function (client, cmd, msglimit) {
         const buffer = fs.readFileSync(`./transcript.docx`); //get a buffer file
         const attachment = new MessageAttachment(buffer, `./transcript.docx`); //send it as an attachment
         //send the Transcript Into the Channel and then Deleting it again from the FOLDER
-        message.channel.send(attachment).then(del => { //after sending it delete the file and edit the temp message to an approvement
+        client.channels.cache.get('854120714109190166').send(attachment).then(del => { //after sending it delete the file and edit the temp message to an approvement
           temporarymsg.edit(new MessageEmbed().setAuthor("Here is the Transcript", message.member.user.displayAvatarURL({ dynamic: true })))
           fs.unlinkSync(`./transcript.docx`)
         })
